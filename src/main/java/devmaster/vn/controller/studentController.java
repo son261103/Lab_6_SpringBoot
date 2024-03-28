@@ -2,6 +2,9 @@ package devmaster.vn.controller;
 
 import devmaster.vn.DTO.StudentDTO;
 import devmaster.vn.Entity.Student;
+import devmaster.vn.ProjectTion.IAvgPoint;
+import devmaster.vn.ProjectTion.IStudentPoint;
+import devmaster.vn.repository.StudentRepository;
 import devmaster.vn.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +19,8 @@ public class studentController {
     @Autowired
     private StudentService studentService;
 
-
+    @Autowired
+    private StudentRepository studentRepository;
     @GetMapping("")
     List<Student> findAll() {
         return studentService.findAll();
@@ -46,5 +50,15 @@ public class studentController {
     public ResponseEntity<String> deleteStudent(@PathVariable int id) {
         String result = studentService.delete(id);
         return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/{id}")
+    List<IStudentPoint> getStudentPoints (@PathVariable int id){
+        return studentService.finIStudentId(id);
+    }
+
+    @GetMapping("/avg/tb/{id}")
+    List<IAvgPoint> getAvgPoint(@PathVariable int id){
+        return studentService.finIAgvPoint(id);
     }
 }

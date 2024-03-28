@@ -3,6 +3,9 @@ package devmaster.vn.Entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 @Table(name = "student")
 @Entity
@@ -29,4 +32,11 @@ public class Student {
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "clazz_id")
     private Clazz clazz;
+
+    @ManyToMany
+    @JoinTable(name = "student_subject",
+            joinColumns = @JoinColumn(name = "id_student",referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "id_subject", referencedColumnName = "id"))
+    private List<Subject> subject = new ArrayList<>();
+
 }

@@ -3,6 +3,8 @@ package devmaster.vn.service;
 import devmaster.vn.DTO.StudentDTO;
 import devmaster.vn.Entity.Clazz;
 import devmaster.vn.Entity.Student;
+import devmaster.vn.ProjectTion.IAvgPoint;
+import devmaster.vn.ProjectTion.IStudentPoint;
 import devmaster.vn.mapper.ClazzMapper;
 import devmaster.vn.mapper.StudentMappper;
 import devmaster.vn.repository.ClazzRepository;
@@ -87,6 +89,13 @@ public class StudentService {
         studentRepository.deleteById(id);
 
         return "Xóa thành công";
+    }
+
+    public List<IStudentPoint> finIStudentId (int id){
+        return studentRepository.findStudentByAddress(id);
+    }
+    public List<IAvgPoint> finIAgvPoint (int id){
+        return studentRepository.findavgPoint(id);
     }
 
 }

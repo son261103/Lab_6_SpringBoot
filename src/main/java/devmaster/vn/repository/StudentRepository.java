@@ -1,6 +1,8 @@
 package devmaster.vn.repository;
 
 import devmaster.vn.Entity.Student;
+import devmaster.vn.ProjectTion.IAvgPoint;
+import devmaster.vn.ProjectTion.IStudentPoint;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -26,5 +28,32 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     @Modifying
     @Query(value = "DELETE FROM Student WHERE id = :id", nativeQuery = true)
     void deleteStudent(@Param("id") int id);
+
+
+    @Query(value = "select   concat(s.last_name, '' , s.first_name) name,\n" +
+            "s.address,\n" +
+            "c.name,\n" +
+            "s2.name,\n" +
+            "ss.point\n" +
+            "\n" +
+            "from student s\n" +
+            "left join clazz c on s.clazz_id = c.id\n" +
+            "left join student_subject ss on s.id = ss.id_student\n" +
+            "left join subject s2 on s2.id = ss.id_student\n" +
+            "where s.id = 1;", nativeQuery = true )
+    List<IStudentPoint> findStudentByAddress(@Param("id") int id);
+
+    @Query(value = "select   concat(s.last_name, '' , s.first_name) name,\n" +
+            "s.address,\n" +
+            "c.name,\n" +
+            "s2.name,\n" +
+            "ss.point\n" +
+            "\n" +
+            "from student s\n" +
+            "left join clazz c on s.clazz_id = c.id\n" +
+            "left join student_subject ss on s.id = ss.id_student\n" +
+            "left join subject s2 on s2.id = ss.id_student\n" +
+            "where s.id = 1;", nativeQuery = true)
+    List<IAvgPoint> findavgPoint(@Param("id") int id);
 
 }
