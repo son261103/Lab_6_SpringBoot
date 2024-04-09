@@ -46,16 +46,16 @@ public class StudentService {
 
     @Transactional
     public String save(StudentDTO studentDTO) {
-        // Chuyển đổi StudentDTO thành Entity Student
+
         Student student = studentMapper.toEntity(studentDTO);
 
-        // Lấy thông tin lớp học từ StudentDTO và chuyển đổi thành Entity Clazz
+
         Clazz clazz = clazzMapper.toEntity(studentDTO.getClazz());
 
-        // Lưu thông tin lớp học vào cơ sở dữ liệu (nếu chưa tồn tại)
+
         clazz = clazzRepository.save(clazz);
 
-        // Gán lớp học cho sinh viên và lưu vào cơ sở dữ liệu
+
         student.setClazz(clazz);
         studentRepository.save(student);
 
@@ -63,7 +63,7 @@ public class StudentService {
     }
 
 
-    public String update(int id, StudentDTO studentDTO) {
+    public String update(StudentDTO studentDTO) {
         boolean existsStudent = studentRepository.existsById(id);
 //        Clazz clazz = clazzRepository.findById(studentDTO.getClazz().getId());
 
@@ -78,14 +78,14 @@ public class StudentService {
 
     @Transactional
     public String delete(int id) {
-        // Kiểm tra xem sinh viên có tồn tại không
+
         boolean existsStudent = studentRepository.existsById(id);
 
         if (!existsStudent) {
             return "Không có sinh viên có id = " + id;
         }
 
-        // Xóa sinh viên từ cơ sở dữ liệu dựa trên id
+
         studentRepository.deleteById(id);
 
         return "Xóa thành công";

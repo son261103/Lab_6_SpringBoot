@@ -12,5 +12,4 @@ import lombok.NoArgsConstructor;
 public class ClazzDTO {
     private Integer id;
     private String name;
-
 }

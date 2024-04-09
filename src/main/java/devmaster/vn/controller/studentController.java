@@ -32,7 +32,7 @@ public class studentController {
     }
 
     // Endpoint để thêm mới sinh viên
-    @PostMapping
+    @PostMapping("/student")
     public ResponseEntity<String> addStudent(@RequestBody StudentDTO studentDTO) {
         String result = studentService.save(studentDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(result);
@@ -41,7 +41,7 @@ public class studentController {
     // Endpoint để cập nhật thông tin sinh viên
     @PutMapping("/{id}")
     public ResponseEntity<String> updateStudent(@PathVariable int id, @RequestBody StudentDTO studentDTO) {
-        String result = studentService.update(id, studentDTO);
+        String result = studentService.update(studentDTO);
         return ResponseEntity.ok(result);
     }
 

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/style.css}" rel="stylesheet" />
+</head>
+<body>
+<h1 th:text="${'hello word ' + name}">Hello Sơn </h1>
+<div th:text="${name}"></div>
+<!--<div th:text="${studentDTO.getName()}"></div>-->
+<!--<div th:text="${studentDTO.getAddress()}"></div>-->
+<table>
+    <tr class="header">
+        <th>Địa chỉ</th>
+        <th>&emsp; Điểm trung bình</th>
+    </tr>
+    <tr th:each="student : ${studentDTO}">
+        <td th:text="${studentDTO.getName()}"><br></td>&emsp;
+        <td th:text="${studentDTO.getAddress()}"><br></td>
+    </tr>
+</table>
+<div>
+    <a th:href="@{/views/add_student}">
+        Thêm sinh viên
+    </a>
+</div>
+<div>
+    <a th:href="@{/view/update_student}">
+        Sửa sinh viên
+    </a>
+</div>
+<div>
+    <a th:href="@{/view/delete_student}">
+        Xóa sinh viên
+    </a>
+</div>
+
+
+
+</body>
+</html>

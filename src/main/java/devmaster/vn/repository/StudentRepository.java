@@ -43,17 +43,18 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
             "where s.id = 1;", nativeQuery = true )
     List<IStudentPoint> findStudentByAddress(@Param("id") int id);
 
-    @Query(value = "select   concat(s.last_name, '' , s.first_name) name,\n" +
-            "s.address,\n" +
-            "c.name,\n" +
-            "s2.name,\n" +
-            "ss.point\n" +
-            "\n" +
-            "from student s\n" +
-            "left join clazz c on s.clazz_id = c.id\n" +
-            "left join student_subject ss on s.id = ss.id_student\n" +
-            "left join subject s2 on s2.id = ss.id_student\n" +
-            "where s.id = 1;", nativeQuery = true)
+    @Query(value = "SELECT\n" +
+            "    s.id AS student_id,\n" +
+            "    s.first_name AS first_name,\n" +
+            "    s.last_name AS last_name,\n" +
+            "    s.address AS address,\n" +
+            "    AVG(ss.point) AS averagePoint\n" +
+            "FROM\n" +
+            "    student s\n" +
+            "        LEFT JOIN\n" +
+            "    student_subject ss ON s.id = ss.id_student\n" +
+            "GROUP BY\n" +
+            "    s.id, s.first_name, s.last_name;", nativeQuery = true)
     List<IAvgPoint> findavgPoint(@Param("id") int id);
 
 }
